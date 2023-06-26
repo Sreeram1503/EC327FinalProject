@@ -4,6 +4,7 @@
 #include<chrono>
 #include<ctime>
 #include<thread>
+#include<math.h>
 
 using std::string;
 using std::thread;
@@ -87,12 +88,60 @@ void flipcard(sf::RenderWindow& window, int X, int Y){
 //function to come up with questions and randomize
 
 string createquestion(){
-    //example for now
-    static int question = 0;
-    question++;
-    string str_ques = to_string(question);
-    return str_ques;
+    //generate random numbers
+    a_rand = rand() % 11;
+    b_rand = rand() % 5;
+    c_rand = rand() % 11;
+
+//question 1: factorial
+    int factorial = 1;
+    for(int i = 1; i <= a_rand; i++){
+        factorial *= i;
+    }
+    string ques_factorial = to_string(a_rand) + "!";
+    string ans_factorial = to_string(factorial);
+
+//question 2: derivative x^rand where x=2
+    int exponent = b_rand;
+    int deriv_ans = b_rand * pow(2,b_rand-1);
+    //(d/dx)x^rand where x=2
+    string ques_deriv = "(d/dx) of x ^ " + to_string(exponent) + "where x = 2";
+    string ans_deriv = to_string(deriv_ans);
+
+//question 3: area of a circle with radius c_rand
+    int radius = c_rand;
+    float circle_ans = pow(c_rand,2) * 3.14
+    string ques_radius = "area of circle with radius " + to_string(radius);
+    string ans_radius = to_string(circle_ans);
+
+//question 4: hypotenuse of triangle with sides c_rand and a_rand (rounded)
+    int side_one = a_rand;
+    int side_two = c_rand;
+    float hypot_ans = sqrt((pow(a_rand,2))+(pow(c_rand,2)));
+    string ques_hypo = " find hypotenuse, sides: " + to_string(side_one) + " and " + to_string(side_two);
+    string ans_hypo = to_string(hypot_ans);
+
+//question 5: sin^2(c_rand) + cos^2(b_rand)   answer is always 1
+    string ques_sin = "sin^2(" + to_string(b_rand) + ") + cos^2(" + to_string(b_rand) + ")";
+    string ans_sin = "1";
+
+//question 6: (tan(c_rand) + cot(c_rand)) * 3     answer is always 3
+    string ques_tan = "(tan(" + to_string(c_rand) + ") + cot(" + to_string(c_rand) + ")) * 3";
+    string ans_tan = "3";
+
+//question 7: exponent (2^a_rand)
+    int exp = a_rand;
+    int exp_ans = pow(2,exp);
+    string ques_exp = "2^" + to_string(exp);
+    string ans_exp = to_string(exp_ans);
+
+//question 8: convert b_rand radians to degrees
+    int rad = b_rand;
+    float rad_ans = rad * (180/3.14);
+    string ques_deg = "convert " + to_string(rad) + " to degrees";
+    string ans_deg = to_string(rad_ans);
 }
+
 
 void randquestion(sf::RenderWindow& window){
     //will set question to specific coordinates
