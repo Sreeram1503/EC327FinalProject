@@ -8,6 +8,7 @@
 #include <vector>
 #include <cstdlib>
 #include <random>
+#include <thread> 
 
 using std::string;
 using std::thread;
@@ -86,7 +87,7 @@ public:
 
         srand(time(0)); 
 
-        vector<string> questions = {
+        vector<string> questions_answers = {
             ques_factorial,
             ques_deriv,
             ques_radius,
@@ -94,10 +95,7 @@ public:
             ques_sin,
             ques_tan,
             ques_exp,
-            ques_deg
-        };
-
-        vector<string> answers = {
+            ques_deg,
             ans_factorial,
             ans_deriv,
             ans_radius,
@@ -107,6 +105,17 @@ public:
             ans_exp,
             ans_deg
         };
+
+        /*vector<string> answers = {
+            ans_factorial,
+            ans_deriv,
+            ans_radius,
+            ans_hypo,
+            ans_sin,
+            ans_tan,
+            ans_exp,
+            ans_deg
+        };*/
 
         std::vector<bool> cardFlipped(8, false);
 
@@ -205,18 +214,20 @@ public:
         window.draw(fifteen);
         window.draw(sixteen);
 
+        //std::this_thread::sleep_for(std::chrono::seconds(5));
+
         vector<sf::RectangleShape> cards = { one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen };
 
-        std::shuffle(questions.begin(), questions.end(), g);
+        std::shuffle(questions_answers.begin(), questions_answers.end(), g);
 
-        vector<sf::Text> questionsText(8, text);
-        vector<sf::Text> answersText(8, text);
+        vector<sf::Text> questions_answers_text(16, text);
+        /*vector<sf::Text> answersText(8, text);*/
 
-        for (int i = 0; i < 8; i++) {
-            questionsText[i].setString(questions[i]);
-            questionsText[i].setPosition(cards[i].getPosition().x + 20.f, cards[i].getPosition().y + 20.f);
-            answersText[i].setString(answers[i]);
-            answersText[i].setPosition(cards[i + 8].getPosition().x + 20.f, cards[i + 8].getPosition().y + 20.f);
+        for (int i = 0; i < 16; i++) {
+            questions_answers_text[i].setString(questions_answers[i]);
+            questions_answers_text[i].setPosition(cards[i].getPosition().x + 20.f, cards[i].getPosition().y + 20.f);
+            /*answersText[i].setString(answers[i]);
+            answersText[i].setPosition(cards[i + 8].getPosition().x + 20.f, cards[i + 8].getPosition().y + 20.f);*/
         }
 
         bool hasFlippedCard = false; // Flag to track if a card has been flipped
@@ -244,7 +255,7 @@ public:
                                     if (hasFlippedCard) {
                                         // Second card flipped, check for a match
                                         cardFlipped[i] = true;
-                                        if (questions[i] == questions[flippedCardIndex]) {
+                                        if (questions_answers[i] == questions_answers[flippedCardIndex]) {
                                             // Match found
                                             // Add your logic here for handling a match
                                         } else {
@@ -270,15 +281,12 @@ public:
             for (int i = 0; i < 16; i++) {
                 window.draw(cards[i]);
              if (cardFlipped[i]) {
-                if (i < 8) {
-                    window.draw(questionsText[i]);
-                } else {
-                    window.draw(answersText[i]);
+                if (i < 16) {
+                    window.draw(questions_answers_text[i]);
                 }
             }
         }
-
-
+            //std::this_thread::sleep_for(std::chrono::seconds(5));
             window.display();
         }
     }
