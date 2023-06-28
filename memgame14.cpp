@@ -65,7 +65,7 @@ void temp_cards(sf::RenderWindow& window,sf::Text card_one,sf::Text card_two){
 class MemoryGame {
 public: 
     MemoryGame() { 
-        sf::RenderWindow window(sf::VideoMode(1050, 850), "Memory Game"); 
+        sf::RenderWindow window(sf::VideoMode(1250, 1000), "Memory Game"); 
 
         // generate random numbers for questions 
         
@@ -160,75 +160,76 @@ public:
             return;
         }
 
-        sf::Text text;
+       sf::Text text;
         text.setFont(font);
         text.setCharacterSize(20);
         text.setFillColor(sf::Color::White);
 
         // creating cards to display 
-        sf::RectangleShape one(sf::Vector2f(200,150));
+        sf::RectangleShape one(sf::Vector2f(270,150));
         one.setPosition(50,50);
         one.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape two(sf::Vector2f(200,150));
-        two.setPosition(300,50);
+        sf::RectangleShape two(sf::Vector2f(270,150));
+        two.setPosition(350,50);
         two.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape three(sf::Vector2f(200,150));
-        three.setPosition(550,50);
+        sf::RectangleShape three(sf::Vector2f(270,150));
+        three.setPosition(650,50);
         three.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape four(sf::Vector2f(200,150));
-        four.setPosition(800,50);
+        sf::RectangleShape four(sf::Vector2f(270,150));
+        four.setPosition(950,50);
         four.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape five(sf::Vector2f(200,150));
+        sf::RectangleShape five(sf::Vector2f(270,150));
         five.setPosition(50,250);
         five.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape six(sf::Vector2f(200,150));
-        six.setPosition(300,250);
+        sf::RectangleShape six(sf::Vector2f(270,150));
+        six.setPosition(350,250);
         six.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape seven(sf::Vector2f(200,150));
-        seven.setPosition(550,250);
+        sf::RectangleShape seven(sf::Vector2f(270,150));
+        seven.setPosition(650,250);
         seven.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape eight(sf::Vector2f(200,150));
-        eight.setPosition(800,250);
+        sf::RectangleShape eight(sf::Vector2f(270,150));
+        eight.setPosition(950,250);
         eight.setFillColor(sf::Color::Blue);
     
-        sf::RectangleShape nine(sf::Vector2f(200,150));
+        sf::RectangleShape nine(sf::Vector2f(270,150));
         nine.setPosition(50,450);
         nine.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape ten(sf::Vector2f(200,150));
-        ten.setPosition(300,450);
+        sf::RectangleShape ten(sf::Vector2f(270,150));
+        ten.setPosition(350,450);
         ten.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape eleven(sf::Vector2f(200,150));
-        eleven.setPosition(550,450);
+        sf::RectangleShape eleven(sf::Vector2f(270,150));
+        eleven.setPosition(650,450);
         eleven.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape twelve(sf::Vector2f(200,150));
-        twelve.setPosition(800,450);
+        sf::RectangleShape twelve(sf::Vector2f(270,150));
+        twelve.setPosition(950,450);
         twelve.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape thirteen(sf::Vector2f(200,150));
+        sf::RectangleShape thirteen(sf::Vector2f(270,150));
         thirteen.setPosition(50,650);
         thirteen.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape fourteen(sf::Vector2f(200,150));
-        fourteen.setPosition(300,650);
+        sf::RectangleShape fourteen(sf::Vector2f(270,150));
+        fourteen.setPosition(350,650);
         fourteen.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape fifteen(sf::Vector2f(200,150));
-        fifteen.setPosition(550,650);
+        sf::RectangleShape fifteen(sf::Vector2f(270,150));
+        fifteen.setPosition(650,650);
         fifteen.setFillColor(sf::Color::Blue);
 
-        sf::RectangleShape sixteen(sf::Vector2f(200,150));
-        sixteen.setPosition(800,650);
+        sf::RectangleShape sixteen(sf::Vector2f(270,150));
+        sixteen.setPosition(950,650);
         sixteen.setFillColor(sf::Color::Blue);
+    
     
     //instructions
             sf::Text instructions;
@@ -406,13 +407,17 @@ public:
 
             for (int i = 0; i < 16; i++) {
                 window.draw(cards[i]);
-             if (cardFlipped[i]) {
-                if (i < 16) {
-                    window.draw(questions_answers_text[i]);
-                //} else {
-                    //window.draw(answersText[i]);
-                }
             }
+    //printing timer
+    countdown_timer(window,countdown,total_start);        
+    window.draw(instructions);
+
+        //once time runs out, game board clears
+            if(time_left <= 0){
+                window.clear();
+                window.draw(game_over);
+                window.draw(restart_button);
+                window.draw(restart_words);
             }
             window.display();
         }
