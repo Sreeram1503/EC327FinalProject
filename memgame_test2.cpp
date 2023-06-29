@@ -44,11 +44,11 @@ private:
 public:
     MemoryGame() : window(sf::VideoMode(1500, 1000), "Math Quest Memory Game") {
         // Load background image
-        //if (!backgroundTexture.loadFromFile("background.jpg")) {
-           // std::cout << "Failed to load background image." << std::endl;
+        if (!backgroundTexture.loadFromFile("background.jpg")) {
+            std::cout << "Failed to load background image." << std::endl;
              //You can add error handling code here if the image fails to load
-        //}
-       // backgroundSprite.setTexture(backgroundTexture);
+        }
+        backgroundSprite.setTexture(backgroundTexture);
 
         // Generate random numbers
         int a_rand = 2 + rand() % 5;
@@ -439,6 +439,11 @@ window.draw(title);
             }
             if (win == true) {
                 window.clear();
+                if (!backgroundTexture.loadFromFile("background.jpg")) {
+                    std::cout << "Failed to load background image." << std::endl;
+             //You can add error handling code here if the image fails to load
+             }
+                backgroundSprite.setTexture(backgroundTexture);
                 sf::Text win_text;
                 win_text.setFont(font); // add in your own 
                 win_text.setCharacterSize(50);
