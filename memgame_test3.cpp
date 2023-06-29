@@ -220,7 +220,7 @@ public:
         int curr_sec = current_time.tm_sec;
         int total_curr = (curr_min * 60) + curr_sec;
         int change = total_curr - total_start;
-        int time_left = 3 - change;
+        int time_left = 180 - change;
         int seconds = time_left % 60;
         int minutes = time_left / 60;
         if (seconds < 10) {
@@ -310,10 +310,10 @@ public:
             if (event.type == sf::Event::MouseButtonPressed){
                      sf::Vector2i pos_mouse = sf::Mouse::getPosition(window);
                     int time_over = countdown_timer(window, countdown, total_start);
-                    if(time_over <= 0 and pos_mouse.x >= 450 && pos_mouse.x <= 600 &&
-                            pos_mouse.y >= 375 && pos_mouse.y <= 450){
-                            std::cout<< time_left<<'\n';
+                    if(time_over <= 0 and restart_button.getGlobalBounds().contains(static_cast<sf::Vector2f>(pos_mouse))){
+                            window.clear();
                             MemoryGame game;
+                            game.Run();
                         }
                 }
             }
