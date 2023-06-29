@@ -45,8 +45,8 @@ public:
     MemoryGame() : window(sf::VideoMode(1500, 1000), "Math Quest Memory Game") {
         // Load background image
         //if (!backgroundTexture.loadFromFile("background.jpg")) {
-            //std::cout << "Failed to load background image." << std::endl;
-            // You can add error handling code here if the image fails to load
+           // std::cout << "Failed to load background image." << std::endl;
+             //You can add error handling code here if the image fails to load
         //}
        // backgroundSprite.setTexture(backgroundTexture);
 
@@ -57,7 +57,7 @@ public:
 
         // Question 1: factorial
         int factorial = 1;
-        for (int i = 1; i <= a_rand; i++) {
+        for (int i = 1; i <= b_rand; i++) {
             factorial *= i;
         }
         std::string ques_factorial = std::to_string(b_rand) + "!";
@@ -239,6 +239,8 @@ public:
         std::tm start_time = *std::localtime(&time);
         backgroundSprite.setTexture(backgroundTexture);
 
+        bool win = false; 
+
         while (window.isOpen())
         {
             sf::Event event;
@@ -246,7 +248,6 @@ public:
             {
                 if (event.type == sf::Event::Closed)
                     window.close();
-                // ...
 
                 if (event.type == sf::Event::MouseButtonPressed && !wait)
                 {
@@ -275,6 +276,14 @@ public:
                                         cards[lastCard].matched = true;
                                         cards[i].matched = true;
                                         lastCard = -1;
+
+                                        win = true; 
+                                        for (const Card& card : cards) {
+                                            if (!card.matched) {
+                                                win = false;
+                                                break; 
+                                            }
+                                        }
                                     }
                                     else {
                                         wait = true;
@@ -314,8 +323,7 @@ public:
             backgroundSprite.setScale(scaleFactor, scaleFactor);
             backgroundSprite.setPosition(
                 (window.getSize().x - backgroundSprite.getGlobalBounds().width) / 2.f,
-                (window.getSize().y - backgroundSprite.getGlobalBounds().height) / 2.f
-            );
+                (window.getSize().y - backgroundSprite.getGlobalBounds().height) / 2.f);
 
             window.draw(backgroundSprite);
 
@@ -429,7 +437,16 @@ window.draw(title);
                     window.draw(game_over);
                 }
             }
-
+            if (win == true) {
+                window.clear();
+                sf::Text win_text;
+                win_text.setFont(font); // add in your own 
+                win_text.setCharacterSize(50);
+                win_text.setFillColor(sf::Color::White);
+                win_text.setString("You Win!");
+                win_text.setPosition(window.getSize().x / 2.f - win_text.getGlobalBounds().width / 2.f, window.getSize().y / 2.f - win_text.getGlobalBounds().height / 2.f);
+                window.draw(win_text);
+            } 
             window.display();
         }
     }
