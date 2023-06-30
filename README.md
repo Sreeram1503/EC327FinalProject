@@ -1,9 +1,16 @@
-# EC327FinalProject
+EC327 Final Project->MathQuest
 
-In order to compile/run the program, the background may need to be commented out and the font may need to be changed (lines #  )
+All the files must be downloaded in order to run the app with full functionality, including the background files, soundtracks, fonts, etc. 
+The following libraries are required to be installed in your computer in order to compile and run the code: 
+SFML Libraries (Graphics Library, Window Library, System Library, and the Audio Library). 
 
-Then, there are instructions on how to work the game within the game itself
+To compile on terminal, run the following command to compile the file, and then the command below it to run. 
 
-Level 1 consists of algebra questions, the answer should be typed in the text box
+g++ -std=c++17 -o prog main.cpp FirstScreen.cpp Level1Screen.cpp Memorygame.cpp pong.cpp -I/opt/homebrew/Cellar/sfml/2.5.1_2/include -L/opt/homebrew/Cellar/sfml/2.5.1_2/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-Once level 1 is passed, level 2 will start, it is a matching game. There are 16 cards face down: 8 quesstions with their corresponding answers. The user needs to find all matches within the timeframe on the countdown timer, if they fail, they will have the option to restart
+(replace -I/opt/homebrew/Cellar/sfml/2.5.1_2/ with the actual path of the libraries in your computer)
+
+./prog 
+
+
+There are instructions of how to play the game within the app itself, and most of the User Interface is self explanatory. 
